@@ -1,0 +1,225 @@
+
+
+<?php $__env->startSection('wrapper'); ?>
+      <nav class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo e(route('admin.adminDashboard')); ?>">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+              <hr class="sidebar-divider">
+
+        <!--######### Multi User Role Management##############################
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" >
+            <i class="fas fa-fw fa-users"></i>
+            <span>Roles Management</span>
+          </a>
+          <hr class="sidebar-divider">
+        </li>
+         -->
+      
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?php echo e(route('admin.viewHosts')); ?>" >
+            <i class="fas fa-fw fa-user"></i>
+            <span>View Hosts</span>
+          </a>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?php echo e(route('admin.viewsuggestions.index')); ?>" >
+            <i class="fas fa-fw fa-comment"></i>
+            <span>View Suggestions</span>
+          </a>
+        </li>
+            
+              
+        <!--###############Sidebar Toggle Area#################
+          <hr class="sidebar-divider d-none d-md-block">
+          <hr class="sidebar-divider d-none d-md-block">      
+          <div class="text-center d-none d-md-inline">
+            <button class="btn rounded-circle mr-3" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+          </div>
+        -->
+      </nav>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ">
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+           <?php if(session('status')): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo e(session('status')); ?>
+
+                </div>
+            <?php endif; ?>
+
+            Welcome <?php echo e(Auth::user()->name); ?>!!
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1 h4">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+      
+            <div class="topbar-divider d-none d-sm-block"></div>
+      
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span><img src="/uploads/avatars/<?php echo e(Auth::user()->avatar); ?>" style="width:32px; height:32px;  top:17px; left:10px;  border-radius:50%"></span>
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+      
+          </ul>
+      
+        </nav>
+      
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-center">Hosts Management</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>status</th>
+                    <th>Actions</th>
+                    
+                </tr>
+                </thead>
+               <tbody>
+               <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $h): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+               <?php if($h->name!= "admin"): ?> 
+                <tr>  
+                    <td><?php echo e($h->name); ?></td>
+                    <td><?php echo e($h->email); ?></td>
+                    <td><?php echo e($h->gender); ?></td>
+                    <td>
+                      <?php if($h->status_code=="0"): ?>
+                        <span class="btn btn-success btn-sm"><i class="fas fa-unlock fa-sm text-white-50"></i>Unblocked<span>
+                      <?php else: ?>
+                        <span class="btn btn-danger btn-sm"><i class="fas fa-lock fa-sm text-white-50"></i>Blocked<span>
+                      <?php endif; ?>   
+                    </td>
+                    <td>     
+                        <?php if($h->status_code=="1"): ?>
+                          <a href="<?php echo e(route('admin.changestatus', $h->id)); ?>" class="btn btn-success btn-sm"><i class="fas fa-unlock fa-sm text-white-50"></i>Unblock</a>
+                        <?php else: ?>
+                        <a href="<?php echo e(route('admin.changestatus', $h->id)); ?>" class="btn btn-warning btn-sm"><i class="fas fa-lock fa-sm text-white-50"></i>Block</a>
+                        <?php endif; ?>                  
+                        <form action="<?php echo e(route('admin.users.destroy', $h)); ?>" method="POST" class="float-left">
+                        <?php echo csrf_field(); ?> 
+                        <?php echo e(method_field('DELETE')); ?>
+
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm text-white-50"></i>Delete</button>
+                      </form>
+                    </td>
+                </tr>
+                <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Team LMAO 3D</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts\AdminLayout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\lmao3d\resources\views/admin/viewHosts.blade.php ENDPATH**/ ?>
