@@ -1,0 +1,78 @@
+<?php
+
+namespace App;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\AdminResetPasswordNotification;
+
+
+class Client extends Authenticatable implements MustVerifyEmail
+{
+    use Notifiable;
+
+    protected $guard = 'client';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    // public function roles(){
+    //     return $this->belongsToMany('App\Role');
+    // }
+
+    // public function hasAnyRoles($roles){
+    //     if($this->roles()->whereIn('name', $roles)->first()){
+    //         return  true;
+    //     }
+
+    //     return false;
+    // }
+    // public function hasRoles($role){
+    //     if($this->roles()->where('name', $role)->first()){
+    //         return  true;
+    //     }
+
+    //     return false;
+    // }
+
+    // public function files(){
+    //     return $this->hasMany('App\Files');
+    // }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ClientResetPasswordNotification($token));
+    }
+    public function threads(){
+        return $this->hasMany('App\Thread');
+    }
+}
